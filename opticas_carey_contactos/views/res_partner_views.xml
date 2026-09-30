@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_partner_form_inherit_opticas_carey" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.opticas.carey</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- Ocupación después del teléfono en la zona principal -->
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name="x_occupation"/>
+            </xpath>
+
+            <!-- Pestañas dentro del notebook -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Antecedentes clínicos" name="antecedentes_clinicos">
+                    <group>
+                        <field name="x_age"/>
+                        <field name="x_pathological_history_general"/>
+                        <field name="x_pathological_history_ocular"/>
+                        <field name="x_allergies"/>
+                        <field name="x_difficulty_distance_near"/>
+                        <field name="x_used_glasses_before"/>
+                    </group>
+                </page>
+                <page string="Visitas" name="visitas">
+                    <field name="x_visits_1">
+                        <!-- Vista lista embebida -->
+                        <list>
+                            <field name="create_date" string="Fecha de consulta"/>
+                            <field name="create_uid" string="Creado por"/>
+                            <field name="x_clinical_history" string="Historia Clínica"/>
+                        </list>
+                        <!-- Vista formulario embebida -->
+                        <form>
+                            <sheet>
+                                <group>
+                                    <field name="x_clinical_history"/>
+                                    <field name="x_light_sensitivity"/>
+                                    <field name="x_last_prescription_date"/>
+                                    <field name="x_previous_prescription"/>
+                                </group>
+                                <group string="Examen Visual">
+                                    <field name="x_av_ca"/>
+                                    <field name="x_av_sa"/>
+                                    <field name="x_di"/>
+                                </group>
+                                <group string="Receta Médica">
+                                    <field name="x_rx"/>
+                                    <field name="x_od"/>
+                                    <field name="x_oi"/>
+                                    <field name="x_add"/>
+                                    <field name="x_optometistra"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
